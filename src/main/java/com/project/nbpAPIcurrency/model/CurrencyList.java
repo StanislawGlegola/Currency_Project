@@ -5,8 +5,14 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class CurrencyList {
+public class CurrencyList extends Currency{
     private List<Currency> currencyList;
+    private String number;
+
+    public CurrencyList(List<Currency> currencyList, String number) {
+        this.currencyList = currencyList;
+        this.number = number;
+    }
 
     public CurrencyList(List<Currency> currencyList) {
         this.currencyList = currencyList;
@@ -25,5 +31,13 @@ public class CurrencyList {
 
     public void addCurrency(Currency currency) {
         this.currencyList.add(currency);
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 }

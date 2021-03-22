@@ -5,10 +5,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class Currency {
     private String name;
-    private double value;
+    private String currencyCode;
+    private String value;
 
-    public Currency(String name, double value) {
+    public Currency(String name, String currencyCode, String value) {
         this.name = name;
+        this.currencyCode = currencyCode;
         this.value = value;
     }
 
@@ -23,12 +25,20 @@ public class Currency {
         this.name = name;
     }
 
-    public double getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(double value) {
+    public void setValue(String value) {
         this.value = value;
+    }
+
+    public String getCurrencyCode() {
+        return currencyCode;
+    }
+
+    public void setCurrencyCode(String currencyCode) {
+        this.currencyCode = currencyCode;
     }
 }
 
