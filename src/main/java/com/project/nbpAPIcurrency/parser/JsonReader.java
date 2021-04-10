@@ -31,17 +31,23 @@ public class JsonReader {
         while ((cp= reader.read())!=-1){
             stringBuilder.append((char) cp);
         }
-        return stringBuilder.toString();
+        return removeFirstAndLastCharToKillArrayOfRates(stringBuilder.toString());
     }
 
     private static void closeResource(AutoCloseable closeable) {
         try {
             if (closeable != null) {
                 closeable.close();
-                System.out.println("\n" + closeable.getClass().getName() + " CLOSED");
+                //System.out.println("\n" + closeable.getClass().getName() + " CLOSED");
             }
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }
+    }
+
+    public static String removeFirstAndLastCharToKillArrayOfRates(String s) {
+        return (s == null || s.length() == 0)
+                ? null
+                : (s.substring(1, s.length() - 1));
     }
 }
