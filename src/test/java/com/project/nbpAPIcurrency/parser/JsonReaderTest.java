@@ -9,9 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class JsonReaderTest {
 
-
     @Test
-    void shouldPrintInConsoleFullJson() throws IOException {
+    void shouldReturnFalseIfJSONisEmpty() throws IOException {
         //given
         final String url = "http://api.nbp.pl/api/exchangerates/tables/a?format=json";
         //when
@@ -19,5 +18,16 @@ class JsonReaderTest {
         //then
         System.out.println(data);
         assertFalse(data.isEmpty());
+    }
+
+    @Test
+    void shouldReturnTrueIFFirstAndLastCharacterIsACurlyBrackets() throws IOException {
+        //given
+        final String url = "http://api.nbp.pl/api/exchangerates/tables/a?format=json";
+        //when
+        String data = getDataFromUrl(url);
+        //then
+        assertTrue(data.charAt(0)=='{');
+        assertTrue(data.charAt(data.length() - 1)=='}');
     }
 }
