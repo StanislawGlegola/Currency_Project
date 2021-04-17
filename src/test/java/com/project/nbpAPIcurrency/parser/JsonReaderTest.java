@@ -1,12 +1,14 @@
 package com.project.nbpAPIcurrency.parser;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 
 import static com.project.nbpAPIcurrency.parser.JsonReader.getDataFromUrl;
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
 class JsonReaderTest {
 
     @Test
