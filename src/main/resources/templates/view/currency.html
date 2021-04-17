@@ -10,7 +10,8 @@
 <!--
 <h1 th:text="${currencyDoWidoku}"/>
 -->
-<h1 th:text="${getValueJakis}"/>
+<!--<h1 th:text="${getValueJakis}"/>-->
+<h1>Current currency</h1>
 <table class="table table-dark">
     <thead>
     <tr>
@@ -20,28 +21,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="singleCurrency: ${currencyList}">
-        <th th:text="${singleCurrency.name}"/></th>
-        <th th:text="${singleCurrency.currencyCode}"/></th>
-        <th th:text="${singleCurrency.value}"/></th>
+    <tr th:each="singleRate: ${ratesList}">
+        <th th:text="${singleRate.currency}"/></th>
+        <th th:text="${singleRate.code}"/></th>
+        <th th:text="${singleRate.mid}"/></th>
     </tr>
     </tbody>
 </table>
-<!--<table class="table table-dark">
-    <thead>
-    <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Code</th>
-        <th scope="col">Value</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="currency: ${currencyList}">
-        <th th:text="${currency.name}"/></th>
-        <th th:text="${currency.currencyCode}"/></th>
-        <th th:text="${currency.value}"/></th>
-    </tr>
-    </tbody>
-</table>-->
 </body>
 </html>
