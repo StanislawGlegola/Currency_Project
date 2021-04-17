@@ -2,16 +2,28 @@ package com.project.nbpAPIcurrency.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public class ExchangeRatesTableDTO {
 
     @JsonProperty("no")
     private String no;
     @JsonProperty("rateDTO")
-    private RatesDTO[] rateDTO;
+    private List rateDTO;
     @JsonProperty("table")
     private String table;
     @JsonProperty("effectiveDate")
     private String effectiveDate;
+
+    public ExchangeRatesTableDTO(String no, List rateDTO, String table, String effectiveDate) {
+        this.no = no;
+        this.rateDTO = rateDTO;
+        this.table = table;
+        this.effectiveDate = effectiveDate;
+    }
+
+    public ExchangeRatesTableDTO() {
+    }
 
     public String getNo() {
         return no;
@@ -21,11 +33,11 @@ public class ExchangeRatesTableDTO {
         this.no = no;
     }
 
-    public RatesDTO[] getRates() {
+    public List getRates() {
         return rateDTO;
     }
 
-    public void setRates(RatesDTO[] rateDTO) {
+    public void setRates(List rateDTO) {
         this.rateDTO = rateDTO;
     }
 
