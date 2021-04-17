@@ -1,10 +1,24 @@
 package com.project.nbpAPIcurrency.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class RatesDTO {
 
-    private String code;
-    private String mid;
+    @JsonProperty("currency")
     private String currency;
+    @JsonProperty("code")
+    private String code;
+    @JsonProperty("mid")
+    private String mid;
+
+    public RatesDTO(String currency, String code, String mid) {
+        this.currency = currency;
+        this.code = code;
+        this.mid = mid;
+    }
+
+    public RatesDTO() {
+    }
 
     public String getCode() {
         return code;
