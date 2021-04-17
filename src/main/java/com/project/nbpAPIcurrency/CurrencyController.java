@@ -18,7 +18,7 @@ public class CurrencyController {
 
     @GetMapping("/")
     public String currency(Model model) throws IOException {
-        ExchangeRatesTableDTO currencyList = currencyService.getCurrencyList();
+        ExchangeRatesTableDTO currencyList = currencyService.return_ERT_DTO_Object();
         //String getNumber = currencyService.getCurrencyList().getNumber();
         model.addAttribute("ratesList", currencyList.getRates());
         //model.addAttribute("getValueJakis", getNumber);

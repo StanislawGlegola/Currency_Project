@@ -1,24 +1,19 @@
 package com.project.nbpAPIcurrency;
-import com.project.nbpAPIcurrency.dto.CurrencyDto;
-import com.project.nbpAPIcurrency.dto.CurrencyListDto;
-import com.project.nbpAPIcurrency.model.CurrencyList;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import com.project.nbpAPIcurrency.dto.ExchangeRatesTableDTO;
+import com.project.nbpAPIcurrency.dto.RatesDTO;
+import com.project.nbpAPIcurrency.parser.Mapper;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.io.IOException;
 
 @Service
 public class CurrencyService {
 
-    @Autowired
-    CurrencyListDto currencyListDto;
-    CurrencyDto currencyDto;
+    Mapper mapper;
 
-    public CurrencyList getCurrencyList(){
-        return currencyListDto.currListDto();
-    }
+    public ExchangeRatesTableDTO return_ERT_DTO_Object() throws IOException {
 
-    public List getXMLList(){
-        return currencyListDto.createListFromReader();
+        return mapper.mapperThenDto();
     }
 }
