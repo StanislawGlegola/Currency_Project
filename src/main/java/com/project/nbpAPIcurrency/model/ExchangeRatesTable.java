@@ -1,22 +1,24 @@
 package com.project.nbpAPIcurrency.model;
 
 import com.project.nbpAPIcurrency.dto.RatesDTO;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class ExchangeRatesTable {
 
     private String no;
-    private List rateDTO;
+    private List rates;
     private String table;
     private String effectiveDate;
 
     public ExchangeRatesTable() {
     }
 
-    public ExchangeRatesTable(String no, List rateDTO, String table, String effectiveDate) {
+    public ExchangeRatesTable(String no, List rates, String table, String effectiveDate) {
         this.no = no;
-        this.rateDTO = rateDTO;
+        this.rates = rates;
         this.table = table;
         this.effectiveDate = effectiveDate;
     }
@@ -29,12 +31,12 @@ public class ExchangeRatesTable {
         this.no = no;
     }
 
-    public List getRateDTO() {
-        return rateDTO;
+    public List getRates() {
+        return rates;
     }
 
-    public void setRateDTO(List rateDTO) {
-        this.rateDTO = rateDTO;
+    public void setRates(List rates) {
+        this.rates = rates;
     }
 
     public String getTable() {

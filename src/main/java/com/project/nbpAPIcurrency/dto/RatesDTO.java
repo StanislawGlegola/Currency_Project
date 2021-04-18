@@ -1,7 +1,9 @@
 package com.project.nbpAPIcurrency.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RatesDTO {
 
     @JsonProperty("currency")

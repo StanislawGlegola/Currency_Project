@@ -1,23 +1,25 @@
 package com.project.nbpAPIcurrency.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class ExchangeRatesTableDTO {
 
     @JsonProperty("no")
     private String no;
-    @JsonProperty("rateDTO")
-    private List rateDTO;
+    @JsonProperty("rates")
+    private List rates;
     @JsonProperty("table")
     private String table;
     @JsonProperty("effectiveDate")
     private String effectiveDate;
 
-    public ExchangeRatesTableDTO(String no, List rateDTO, String table, String effectiveDate) {
+    public ExchangeRatesTableDTO(String no, List rates, String table, String effectiveDate) {
         this.no = no;
-        this.rateDTO = rateDTO;
+        this.rates = rates;
         this.table = table;
         this.effectiveDate = effectiveDate;
     }
@@ -34,11 +36,11 @@ public class ExchangeRatesTableDTO {
     }
 
     public List getRates() {
-        return rateDTO;
+        return rates;
     }
 
     public void setRates(List rateDTO) {
-        this.rateDTO = rateDTO;
+        this.rates = rateDTO;
     }
 
     public String getTable() {
@@ -59,7 +61,7 @@ public class ExchangeRatesTableDTO {
 
     @Override
     public String toString() {
-        return "ClassPojo [no = " + no + ", ratesDTO = " + rateDTO + ", table = " + table + ", effectiveDate = " + effectiveDate + "]";
+        return "ClassPojo [no = " + no + ", ratesDTO = " + rates + ", table = " + table + ", effectiveDate = " + effectiveDate + "]";
     }
 }
 

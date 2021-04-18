@@ -1,7 +1,9 @@
 package com.project.nbpAPIcurrency.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Rates {
 
     private String currency;
