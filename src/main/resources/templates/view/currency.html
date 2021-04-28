@@ -6,27 +6,38 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
+<style>
+    body{
+        background-color: #E7E9EB;
+    }
+</style>
 <body>
 <!--
 <h1 th:text="${currencyDoWidoku}"/>
 -->
 <!--<h1 th:text="${getValueJakis}"/>-->
-<h1>Current currency</h1>
-<table class="table table-dark">
-    <thead>
-    <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Code</th>
-        <th scope="col">Value</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="singleRate: ${ratesList}">
-        <th th:text="${singleRate.currency}"/></th>
-        <th th:text="${singleRate.code}"/></th>
-        <th th:text="${singleRate.mid}"/></th>
-    </tr>
-    </tbody>
-</table>
+<h1>Currency shop</h1>
+<div class="container" style="width: 200px; left: 150px">
+    <table class="table table-dark">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Code</th>
+            <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="singleRate: ${ratesList}">
+            <th th:text="${singleRate.currency}"/>
+            </th>
+            <th th:text="${singleRate.code}"/>
+            </th>
+            <th th:text="${singleRate.mid}"/>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 </body>
 </html>

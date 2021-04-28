@@ -1,57 +1,28 @@
 package com.project.nbpAPIcurrency.model;
 
-import com.project.nbpAPIcurrency.dto.RatesDTO;
-import org.springframework.stereotype.Component;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.List;
 
-@Component
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Entity
+@Table(name = "ExchangeRatesTable")
 public class ExchangeRatesTable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @JsonProperty("table")
+    private String tableLetter;
     private String no;
-    private List rates;
-    private String table;
     private String effectiveDate;
+    @OneToMany(targetEntity = Rates.class,cascade = CascadeType.ALL)
+    private List<Rates> rates;
 
-    public ExchangeRatesTable() {
-    }
-
-    public ExchangeRatesTable(String no, List rates, String table, String effectiveDate) {
-        this.no = no;
-        this.rates = rates;
-        this.table = table;
-        this.effectiveDate = effectiveDate;
-    }
-
-    public String getNo() {
-        return no;
-    }
-
-    public void setNo(String no) {
-        this.no = no;
-    }
-
-    public List getRates() {
-        return rates;
-    }
-
-    public void setRates(List rates) {
-        this.rates = rates;
-    }
-
-    public String getTable() {
-        return table;
-    }
-
-    public void setTable(String table) {
-        this.table = table;
-    }
-
-    public String getEffectiveDate() {
-        return effectiveDate;
-    }
-
-    public void setEffectiveDate(String effectiveDate) {
-        this.effectiveDate = effectiveDate;
-    }
 }

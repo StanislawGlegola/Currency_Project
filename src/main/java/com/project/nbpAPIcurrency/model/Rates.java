@@ -1,51 +1,23 @@
 package com.project.nbpAPIcurrency.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.stereotype.Component;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Component
+import javax.persistence.*;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Entity
+@Table(name = "Rates")
 public class Rates {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String currency;
     private String code;
     private String mid;
-
-    public Rates(String currency, String code, String mid) {
-        this.currency = currency;
-        this.code = code;
-        this.mid = mid;
-    }
-
-    public Rates() {
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getMid() {
-        return mid;
-    }
-
-    public void setMid(String mid) {
-        this.mid = mid;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    @Override
-    public String toString() {
-        return "ClassPojo [code = " + code + ", mid = " + mid + ", currency = " + currency + "]";
-    }
 
 }

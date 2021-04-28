@@ -10,7 +10,7 @@ import java.io.IOException;
 @Component
 public class Mapper {
 
-    public static ExchangeRatesTableDTO mapperThenDto() throws IOException {
+    public static ExchangeRatesTableDTO mapperToDto() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         String json = JsonReader.getDataFromUrl("http://api.nbp.pl/api/exchangerates/tables/a?format=json");
         ExchangeRatesTableDTO exchangeRatesTableDTO = objectMapper.readValue(json, ExchangeRatesTableDTO.class);
@@ -19,7 +19,7 @@ public class Mapper {
 
     public static ExchangeRatesTable dtoToEntity() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        ExchangeRatesTable exchangeRatesTable = objectMapper.convertValue(mapperThenDto(),ExchangeRatesTable.class);
+        ExchangeRatesTable exchangeRatesTable = objectMapper.convertValue(mapperToDto(),ExchangeRatesTable.class);
         return exchangeRatesTable;
     }
 

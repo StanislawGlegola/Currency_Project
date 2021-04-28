@@ -17,16 +17,16 @@ public class CurrencyController {
         this.currencyService = currencyService;
     }
 
-   /* @GetMapping("/")
-    public String currency(Model model) throws IOException {
-        ExchangeRatesTableDTO currencyList = currencyService.return_ERT_DTO_Object();
-        //String getNumber = currencyService.getCurrencyList().getNumber();
+    @GetMapping("/repo")
+    public String currencyFromRepo(Model model) throws IOException {
+        currencyService.saveDAOAsEntity();
+        ExchangeRatesTable currencyList = currencyService.repository(1L);
         model.addAttribute("ratesList", currencyList.getRates());
         //model.addAttribute("getValueJakis", getNumber);
         return "view/currency";
-    }*/
+    }
 
-    @GetMapping("/")
+    @GetMapping("/dto")
     public String todaysResults(Model model) throws IOException {
         ExchangeRatesTable currencyList = currencyService.return_Object();
         //String getNumber = currencyService.getCurrencyList().getNumber();

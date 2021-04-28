@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 
-import static com.project.nbpAPIcurrency.parser.Mapper.mapperThenDto;
+import static com.project.nbpAPIcurrency.parser.Mapper.mapperToDto;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -14,8 +14,8 @@ class MapperTest {
 
     @Test
     void shouldReturnTableALetter() throws IOException {
-        ExchangeRatesTableDTO exchangeRatesTableDTO = mapperThenDto();
-        String table = exchangeRatesTableDTO.getTable();
+        ExchangeRatesTableDTO exchangeRatesTableDTO = mapperToDto();
+        String table = exchangeRatesTableDTO.getTableLetter();
         assertEquals(table, "A");
         //System.out.println(table);
 
