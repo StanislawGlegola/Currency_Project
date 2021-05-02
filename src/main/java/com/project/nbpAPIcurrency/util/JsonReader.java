@@ -1,4 +1,4 @@
-package com.project.nbpAPIcurrency.parser;
+package com.project.nbpAPIcurrency.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,7 +31,12 @@ public class JsonReader {
         while ((cp= reader.read())!=-1){
             stringBuilder.append((char) cp);
         }
-        return removeFirstAndLastCharToKillArrayOfRates(stringBuilder.toString());
+        if(stringBuilder.toString().startsWith("[")){
+            return removeFirstAndLastCharToKillArrayOfRates(stringBuilder.toString());
+        }
+        else {
+            return stringBuilder.toString();
+        }
     }
 
     private static void closeResource(AutoCloseable closeable) {

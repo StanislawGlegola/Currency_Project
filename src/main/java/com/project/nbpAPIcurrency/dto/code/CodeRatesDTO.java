@@ -1,4 +1,4 @@
-package com.project.nbpAPIcurrency.dto;
+package com.project.nbpAPIcurrency.dto.code;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -6,24 +6,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Component
-public class ExchangeRatesTableDTO {
+public class CodeRatesDTO {
 
-    @JsonProperty("no")
-    private String number;
-    @JsonProperty("rates")
-    private List rates;
-    @JsonProperty("table")
-    private String tableLetter;
     @JsonProperty("effectiveDate")
     private String effectiveDate;
+    @JsonProperty("mid")
+    private String mid;
+    @JsonProperty("no")
+    private String no;
 
 }
-
-
-

@@ -1,6 +1,6 @@
 package com.project.nbpAPIcurrency;
 
-import com.project.nbpAPIcurrency.dto.ExchangeRatesTableDTO;
+import com.project.nbpAPIcurrency.dto.code.CodeExchangeRatesTableDTO;
 import com.project.nbpAPIcurrency.model.ExchangeRatesTable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,8 +18,8 @@ public class CurrencyController {
     }
 
     @GetMapping("/repo")
-    public String currencyFromRepo(Model model) throws IOException {
-        currencyService.saveDAOAsEntity();
+    public String currencyFromRepo(Model model) {
+        //currencyService.saveDAOAsEntity();
         ExchangeRatesTable currencyList = currencyService.repository(1L);
         model.addAttribute("ratesList", currencyList.getRates());
         //model.addAttribute("getValueJakis", getNumber);
@@ -27,10 +27,15 @@ public class CurrencyController {
     }
 
     @GetMapping("/dto")
-    public String todaysResults(Model model) throws IOException {
+    public String todaysResults(Model model) {
         ExchangeRatesTable currencyList = currencyService.return_Object();
         //String getNumber = currencyService.getCurrencyList().getNumber();
+        CodeExchangeRatesTableDTO codeExchangeRatesTableDTO = currencyService.returnDailyDto();
+        String currency = codeExchangeRatesTableDTO.getCurrency();
         model.addAttribute("ratesList", currencyList.getRates());
+        model.addAttribute("currencyName", currency);
+        model.addAttribute("codesList", codeExchangeRatesTableDTO.getRates());
+
         //model.addAttribute("getValueJakis", getNumber);
         return "view/currency";
     }

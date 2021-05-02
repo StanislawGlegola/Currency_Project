@@ -1,10 +1,10 @@
-package com.project.nbpAPIcurrency.parser;
+package com.project.nbpAPIcurrency.util;
 
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static com.project.nbpAPIcurrency.parser.JsonReader.getDataFromUrl;
+import static com.project.nbpAPIcurrency.util.JsonReader.getDataFromUrl;
 import static org.junit.jupiter.api.Assertions.*;
 
 class JsonReaderTest {

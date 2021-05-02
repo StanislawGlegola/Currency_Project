@@ -1,16 +1,19 @@
 package com.project.nbpAPIcurrency;
 
-import com.project.nbpAPIcurrency.dto.ExchangeRatesTableDTO;
+import com.project.nbpAPIcurrency.dto.daily.DailyExchangeRatesTableDTO;
+import com.project.nbpAPIcurrency.dto.code.CodeExchangeRatesTableDTO;
 import com.project.nbpAPIcurrency.model.ExchangeRatesTable;
-import com.project.nbpAPIcurrency.parser.Mapper;
+import com.project.nbpAPIcurrency.util.Mapper;
 import com.project.nbpAPIcurrency.repository.CurrencyRepository;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
+import static com.project.nbpAPIcurrency.util.Mapper.mapperCodeToDto;
 
 @Service
 public class CurrencyService {
 
+    private final String dailyCurrency = "http://api.nbp.pl/api/exchangerates/tables/a?format=json";
+    private final String specificCurrency = "http://api.nbp.pl/api/exchangerates/rates/a/gbp/last/10/?format=json";
     private final Mapper mapper;
     private final CurrencyRepository currencyRepository;
 
@@ -19,22 +22,31 @@ public class CurrencyService {
         this.currencyRepository = currencyRepository;
     }
 
-    public ExchangeRatesTableDTO return_ERT_DTO_Object() throws IOException {
+    public DailyExchangeRatesTableDTO return_ERT_DTO_Object() {
 
-        return mapper.mapperToDto();
+        return mapper.mapperDailyToDto(dailyCurrency);
     }
 
-    public ExchangeRatesTable return_Object() throws IOException {
+    public ExchangeRatesTable return_Object() {
 
-        return mapper.dtoToEntity();
+        return mapper.dtoToEntity(dailyCurrency);
     }
 
-    public ExchangeRatesTable saveDAOAsEntity() throws IOException {
+    /*public ExchangeRatesTable saveDAOAsEntity() {
 
         return currencyRepository.save(mapper.dtoToEntity());
+    }*/
+
+    public ExchangeRatesTable repository(Long id) {
+        return currencyRepository.findExchangeRatesTableById(id);
     }
 
-    public ExchangeRatesTable repository(Long id) throws IOException {
-        return currencyRepository.findExchangeRatesTableById(id);
+    public CodeExchangeRatesTableDTO returnDailyDto() {
+        CodeExchangeRatesTableDTO codeExchangeRatesTableDTO = mapperCodeToDto(specificCurrency);
+        return codeExchangeRatesTableDTO;
+    }
+
+    public void saveCodesToFile(){
+
     }
 }
