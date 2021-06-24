@@ -1,11 +1,14 @@
 package com.project.nbpAPIcurrency;
 
+import com.project.nbpAPIcurrency.dto.code.CodeRatesDTO;
 import com.project.nbpAPIcurrency.dto.daily.DailyExchangeRatesTableDTO;
 import com.project.nbpAPIcurrency.dto.code.CodeExchangeRatesTableDTO;
 import com.project.nbpAPIcurrency.model.ExchangeRatesTable;
 import com.project.nbpAPIcurrency.util.Mapper;
 import com.project.nbpAPIcurrency.repository.CurrencyRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import static com.project.nbpAPIcurrency.util.Mapper.mapperCodeToDto;
 
@@ -23,19 +26,20 @@ public class CurrencyService {
     }
 
     public DailyExchangeRatesTableDTO return_ERT_DTO_Object() {
-
         return mapper.mapperDailyToDto(dailyCurrency);
     }
 
     public ExchangeRatesTable return_Object() {
-
         return mapper.dtoToEntity(dailyCurrency);
     }
 
-    /*public ExchangeRatesTable saveDAOAsEntity() {
+    public List findAllCurrencyNames(String rateName) {
+        return currencyRepository.findAllByRates(rateName);
+    }
 
-        return currencyRepository.save(mapper.dtoToEntity());
-    }*/
+    public ExchangeRatesTable saveDAOAsEntity() {
+        return currencyRepository.save(mapper.dtoToEntity(dailyCurrency));
+    }
 
     public ExchangeRatesTable repository(Long id) {
         return currencyRepository.findExchangeRatesTableById(id);

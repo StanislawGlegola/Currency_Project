@@ -32,5 +32,4 @@ public class Mapper {
         CodeExchangeRatesTableDTO codeExchangeRatesTableDTO = objectMapper.readValue(json, CodeExchangeRatesTableDTO.class);
         return codeExchangeRatesTableDTO;
     }
-
 }
