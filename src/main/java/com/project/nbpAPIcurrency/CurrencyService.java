@@ -6,6 +6,8 @@ import com.project.nbpAPIcurrency.dto.code.CodeExchangeRatesTableDTO;
 import com.project.nbpAPIcurrency.model.ExchangeRatesTable;
 import com.project.nbpAPIcurrency.util.Mapper;
 import com.project.nbpAPIcurrency.repository.CurrencyRepository;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,6 +39,7 @@ public class CurrencyService {
         return currencyRepository.findAllByRates(rateName);
     }
 
+    @EventListener(ApplicationReadyEvent.class)
     public ExchangeRatesTable saveDAOAsEntity() {
         return currencyRepository.save(mapper.dtoToEntity(dailyCurrency));
     }
@@ -45,12 +48,12 @@ public class CurrencyService {
         return currencyRepository.findExchangeRatesTableById(id);
     }
 
-    public CodeExchangeRatesTableDTO returnDailyDto() {
+    public CodeExchangeRatesTableDTO returnCodeDto() {
         CodeExchangeRatesTableDTO codeExchangeRatesTableDTO = mapperCodeToDto(specificCurrency);
         return codeExchangeRatesTableDTO;
     }
 
-    public void saveCodesToFile(){
-
+    public CodeExchangeRatesTableDTO generateLinkFromCode(String selectCode) {
+        return mapper.generateLinkToGetCode(selectCode);
     }
 }

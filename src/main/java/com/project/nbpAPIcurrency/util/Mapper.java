@@ -32,4 +32,10 @@ public class Mapper {
         CodeExchangeRatesTableDTO codeExchangeRatesTableDTO = objectMapper.readValue(json, CodeExchangeRatesTableDTO.class);
         return codeExchangeRatesTableDTO;
     }
+
+    public CodeExchangeRatesTableDTO generateLinkToGetCode(String selectCode) {
+        String finishedBuild = "http://api.nbp.pl/api/exchangerates/rates/a/"+selectCode+"/last/10/?format=json";
+
+        return mapperCodeToDto(finishedBuild);
+    }
 }
