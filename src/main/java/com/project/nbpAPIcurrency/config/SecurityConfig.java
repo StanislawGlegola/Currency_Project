@@ -17,26 +17,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public UserDetailsService userDetailsService() {
         UserDetails userDetails = User.withDefaultPasswordEncoder()
                 .username("user")
-                .password("user1")
+                .password("user")
                 .roles("USER")
                 .build();
-        UserDetails adminDetails = User.withDefaultPasswordEncoder()
-                .username("admin")
-                .password("admin1")
-                .roles("ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(adminDetails, userDetails);
+        return new InMemoryUserDetailsManager(userDetails);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/repo").permitAll()
-                .anyRequest().hasRole("ADMIN")
+                .antMatchers("/repo")
+                .hasRole("USER")
                 .and()
                 .formLogin().permitAll()
+                .defaultSuccessUrl("/repo")
                 .and()
-                .logout().permitAll()
-                .logoutSuccessUrl("/repo");
+                .authorizeRequests();
     }
 }
