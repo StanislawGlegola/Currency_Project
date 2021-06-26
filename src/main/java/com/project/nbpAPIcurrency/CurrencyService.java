@@ -6,7 +6,9 @@ import com.project.nbpAPIcurrency.model.Trade;
 import com.project.nbpAPIcurrency.repository.TradeRepository;
 import com.project.nbpAPIcurrency.util.Mapper;
 import com.project.nbpAPIcurrency.repository.CurrencyRepository;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -15,10 +17,8 @@ import org.springframework.stereotype.Service;
 import static com.project.nbpAPIcurrency.util.Mapper.mapperCodeToDto;
 
 @Service
-@EnableScheduling
 public class CurrencyService {
 
-    private final String dailyCurrency = "http://api.nbp.pl/api/exchangerates/tables/a?format=json";
     private final String specificCurrency = "http://api.nbp.pl/api/exchangerates/rates/a/gbp/last/10/?format=json";
     private final Mapper mapper;
     private final CurrencyRepository currencyRepository;
@@ -41,13 +41,6 @@ public class CurrencyService {
     public List findAllCurrencyNames(String rateName) {
         return currencyRepository.findAllByRates(rateName);
     }*/
-
-    @EventListener(ApplicationReadyEvent.class)
-    @Scheduled(cron = "0 1 0 ? * * MON-FRI")
-    public ExchangeRatesTable saveDAOAsEntity() {
-
-        return currencyRepository.save(mapper.dtoToEntity(dailyCurrency));
-    }
 
     public ExchangeRatesTable repository(Long id) {
         return currencyRepository.findExchangeRatesTableById(id);
