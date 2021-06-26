@@ -1,16 +1,15 @@
 package com.project.nbpAPIcurrency;
 
-import com.project.nbpAPIcurrency.dto.code.CodeRatesDTO;
-import com.project.nbpAPIcurrency.dto.daily.DailyExchangeRatesTableDTO;
 import com.project.nbpAPIcurrency.dto.code.CodeExchangeRatesTableDTO;
 import com.project.nbpAPIcurrency.model.ExchangeRatesTable;
+import com.project.nbpAPIcurrency.model.Trade;
+import com.project.nbpAPIcurrency.repository.TradeRepository;
 import com.project.nbpAPIcurrency.util.Mapper;
 import com.project.nbpAPIcurrency.repository.CurrencyRepository;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 import static com.project.nbpAPIcurrency.util.Mapper.mapperCodeToDto;
 
@@ -21,13 +20,15 @@ public class CurrencyService {
     private final String specificCurrency = "http://api.nbp.pl/api/exchangerates/rates/a/gbp/last/10/?format=json";
     private final Mapper mapper;
     private final CurrencyRepository currencyRepository;
+    private final TradeRepository tradeRepository;
 
-    public CurrencyService(Mapper mapper, CurrencyRepository currencyRepository) {
+    public CurrencyService(Mapper mapper, CurrencyRepository currencyRepository, TradeRepository tradeRepository) {
         this.mapper = mapper;
         this.currencyRepository = currencyRepository;
+        this.tradeRepository = tradeRepository;
     }
 
-    public DailyExchangeRatesTableDTO return_ERT_DTO_Object() {
+/*    public DailyExchangeRatesTableDTO return_ERT_DTO_Object() {
         return mapper.mapperDailyToDto(dailyCurrency);
     }
 
@@ -37,10 +38,12 @@ public class CurrencyService {
 
     public List findAllCurrencyNames(String rateName) {
         return currencyRepository.findAllByRates(rateName);
-    }
+    }*/
 
     @EventListener(ApplicationReadyEvent.class)
+    @Scheduled(cron = "0 1 0 ? * * MON-FRI")
     public ExchangeRatesTable saveDAOAsEntity() {
+
         return currencyRepository.save(mapper.dtoToEntity(dailyCurrency));
     }
 
@@ -49,11 +52,18 @@ public class CurrencyService {
     }
 
     public CodeExchangeRatesTableDTO returnCodeDto() {
-        CodeExchangeRatesTableDTO codeExchangeRatesTableDTO = mapperCodeToDto(specificCurrency);
-        return codeExchangeRatesTableDTO;
+        return mapperCodeToDto(specificCurrency);
     }
 
     public CodeExchangeRatesTableDTO generateLinkFromCode(String selectCode) {
         return mapper.generateLinkToGetCode(selectCode);
+    }
+
+    public void changeUserTrade(Trade trade) {
+        tradeRepository.save(trade);
+    }
+
+    public Trade getTradesFromDB(Long id) {
+        return tradeRepository.findTradesById(id);
     }
 }

@@ -25,18 +25,17 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Authors
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item">Action</a></li>
-                        <li><a class="dropdown-item">Another action</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item">Something else here</a></li>
-                    </ul>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Stanislaw Glegoła</a>
+                        <a class="dropdown-item" href="#">Cyprian Kamiński</a>
+                        <a class="dropdown-item" href="#">Miłosz Różański</a>
+                    </div>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/logout">Logout</a>
                 </li>
             </ul>
         </div>
@@ -45,22 +44,28 @@
 
 <div class="container" style="width: 400px; position: absolute; left: 0px;">
     <table class="table table-light">
-        <thead>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Code</th>
-            <th scope="col">Value</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="singleRate: ${ratesList}">
-            <th th:text="${singleRate.currency}"/>
-            </th>
-            <th th:text="${singleRate.code}"/>
-            </th>
-            <th th:text="${singleRate.mid}"/>
-        </tr>
-        </tbody>
+        <form class="form-container">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Code</th>
+                <th scope="col">Value</th>
+                <th>
+                    <button type="submit" class="btn btn-secondary">Update trades</button>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="singleRate: ${ratesList}">
+                <th th:text="${singleRate.currency}"/>
+                </th>
+                <th th:text="${singleRate.code}"/>
+                </th>
+                <th th:text="${singleRate.mid}"/>
+                <th><input href="/repo/update" type="number" th:value="${singleRate.mid}" min="0" th:step="${singleRate.mid}"/></th>
+            </tr>
+            </tbody>
+        </form>
     </table>
 </div>
 
@@ -78,11 +83,10 @@
                     Select code
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-
                     <div th:each="c:${ratesList}">
-                        <a class="dropdown-item" th:value="${c.code}" th:text="${c.code}" th:href="@{'/repo/' + ${c.code}}"></a>
+                        <a class="dropdown-item" th:value="${c.code}" th:text="${c.code}"
+                           th:href="@{'/repo/' + ${c.code}}"></a>
                     </div>
-
                 </div>
             </div>
         </tr>
