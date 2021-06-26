@@ -25,7 +25,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Authors
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -41,7 +42,7 @@
         </div>
     </div>
 </nav>
-
+<!-- Left side -->
 <div class="container" style="width: 400px; position: absolute; left: 0px;">
     <table class="table table-light">
         <form class="form-container">
@@ -62,33 +63,38 @@
                 <th th:text="${singleRate.code}"/>
                 </th>
                 <th th:text="${singleRate.mid}"/>
-                <th><input href="/repo/update" type="number" th:value="${singleRate.mid}" min="0" th:step="${singleRate.mid}"/></th>
+                <th><input href="/repo/update" type="number" th:value="${singleRate.mid}" min="0"
+                           th:step="${singleRate.mid}"/></th>
             </tr>
             </tbody>
         </form>
     </table>
 </div>
 
+<!-- Right side -->
 <div class="container" style="width: 400px; position: absolute; right: 0px;">
     <table class="table table-light">
         <thead>
         <tr>
+            <th>
+                <div class="btn-group dropleft">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Select code
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <div th:each="c:${ratesList}">
+                            <a class="dropdown-item" th:value="${c.code}" th:text="${c.code}"
+                               th:href="@{'/repo/' + ${c.code}}"></a>
+                        </div>
+                    </div>
+                </div>
+            </th>
             <th scope="col"><a th:text="${currencyName}"></a></th>
         </tr>
         <tr>
-            <div class="btn-group dropleft">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                   data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Select code
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <div th:each="c:${ratesList}">
-                        <a class="dropdown-item" th:value="${c.code}" th:text="${c.code}"
-                           th:href="@{'/repo/' + ${c.code}}"></a>
-                    </div>
-                </div>
-            </div>
+
         </tr>
         <tr>
             <th scope="col">Date</th>
